@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Vagalume_v2;
 
 namespace Vagalume_v2.Controllers
 {
@@ -23,6 +22,14 @@ namespace Vagalume_v2.Controllers
         {
             var url = new VagalumeService("https://api.vagalume.com.br/search.art?");
             var result = url.GetArtist(artist);
+            return new OkObjectResult(result);
+        }
+
+        [HttpGet("{artist}/{song}")]
+        public ActionResult GetSongByValues(string artist, string song)
+        {
+            var url = new VagalumeService("https://api.vagalume.com.br/search.php?");
+            var result = url.GetSong(artist, song);
             return new OkObjectResult(result);
         }
     }

@@ -19,8 +19,8 @@ namespace Vagalume_v2
         {
             string link = $"{_host}apiKey=8225b96502a09ad6758f6c4d593b4230s&q={passage}&limit=6";
             var result = _client.GetAsync(link).Result;
-            var musicRelated = result.Content.ReadAsAsync<Music>().Result;
-            return musicRelated;
+            var music = result.Content.ReadAsAsync<Music>().Result;
+            return music;
         }
 
         public Music GetArtist(string artist)
@@ -31,6 +31,12 @@ namespace Vagalume_v2
             return artistRelated;
         }
 
-
+        public Music GetSong(string artist, string song)
+        {
+            string url = $"{_host}art={artist}&mus={song}&extra=alb&apiKey=8225b96502a09ad6758f6c4d593b4230s";
+            var result = _client.GetAsync(url).Result;
+            var music = result.Content.ReadAsAsync<Music>().Result;
+            return music;
+        }
     }
 }

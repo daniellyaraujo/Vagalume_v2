@@ -2,7 +2,10 @@
 
 namespace Vagalume_v2.Interface
 {
-    public class IVagalumeService
+    public interface IVagalumeService
     {
+        Music GetPassage(string passage);
+        Music GetArtist(string artist);
+        Music GetSong(string artist, string song);
     }
 }
