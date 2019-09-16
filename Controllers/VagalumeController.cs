@@ -32,5 +32,14 @@ namespace Vagalume_v2.Controllers
             var result = url.GetSong(artist, song);
             return new OkObjectResult(result);
         }
+
+        [HttpGet]
+        public ActionResult GetNewsByValue(string news)
+        {
+            var url = new VagalumeService("https://www.vagalume.com.br/news/index.js");
+            var result = url.GetNews(news);
+            return new OkObjectResult(result);
+        }
+
     }
 }

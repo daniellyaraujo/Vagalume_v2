@@ -1,9 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using Newtonsoft.Json;
+using System.Collections.Generic;
+using System.Net;
 
 namespace Vagalume_v2.Models
 {
     public class Music
     {
+        [JsonIgnore]
+        public HttpStatusCode StatusCode { get; set; }
         public Response response { get; set; }
         public string type { get; set; }
         public Artist art { get; set; }

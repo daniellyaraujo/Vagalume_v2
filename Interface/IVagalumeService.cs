@@ -7,5 +7,6 @@ namespace Vagalume_v2.Interface
         Music GetPassage(string passage);
         Music GetArtist(string artist);
         Music GetSong(string artist, string song);
+        Notices GetNews(string news);
     }
 }
