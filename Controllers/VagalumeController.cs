@@ -1,45 +1,85 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Vagalume_v2.Interface;
+using Vagalume_v2.Models;
+using Vagalume_v2.Service;
 
 namespace Vagalume_v2.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+
+
     public class VagalumeController : ControllerBase
     {
-        public VagalumeController()
-        { }
+        IVagalumeService _service;
 
-        [HttpGet("{passage}")]
+        public VagalumeController()
+        {
+            _service = new VagalumeService();
+        }
+
+        [HttpGet("music/{music}")]
+        public ActionResult GetMusicByName(string music)
+        {
+            var result = _service.GetMusic(music);
+            switch (result.StatusCode)
+            {
+                case System.Net.HttpStatusCode.OK:
+                    return new OkObjectResult(result);
+                default:
+                    return new StatusCodeResult((int)result.StatusCode);
+            }
+        }
+
+        [HttpGet("passage/{passage}")]
         public ActionResult GetMusicByPassage(string passage)
         {
-            var url = new VagalumeService("https://api.vagalume.com.br/search.excerpt?");
-            var result = url.GetPassage(passage);
-            return new OkObjectResult(result);
+            var result = _service.GetPassage(passage);
+            switch (result.StatusCode)
+            {
+                case System.Net.HttpStatusCode.OK:
+                    return new OkObjectResult(result);
+                default:
+                    return new StatusCodeResult((int)result.StatusCode);
+            }
         }
 
-        [HttpGet("{artist}")]
-        public ActionResult GetArtistByValue(string artist)
+        [HttpGet("artist/{artist}")]
+        public ActionResult GetArtistByName(string artist)
         {
-            var url = new VagalumeService("https://api.vagalume.com.br/search.art?");
-            var result = url.GetArtist(artist);
+            var result = _service.GetArtist(artist);
+            if (result.StatusCode == System.Net.HttpStatusCode.OK)
+            {
+                MessageResponse messageResponse = new MessageResponse();
+                if (result.response.docs.Count == 0)
+                {
+                    messageResponse.Mensagem = "Artista não localizado";
+                    return new BadRequestObjectResult(messageResponse);
+                }
+            }
+            else
+                return new StatusCodeResult((int)result.StatusCode);
+
             return new OkObjectResult(result);
         }
 
-        [HttpGet("{artist}/{song}")]
-        public ActionResult GetSongByValues(string artist, string song)
+        [HttpGet("alb/{alb}")]
+        public ActionResult GetAlbByName(string alb)
         {
-            var url = new VagalumeService("https://api.vagalume.com.br/search.php?");
-            var result = url.GetSong(artist, song);
+            var result = _service.GetAlbum(alb);
+            if (result.StatusCode == System.Net.HttpStatusCode.OK)
+            {
+                MessageResponse messageResponse = new MessageResponse();
+                if (result.response.docs.Count == 0)
+                {
+                    messageResponse.Mensagem = "Album não localizado";
+                    return new BadRequestObjectResult(messageResponse);
+                }
+            }
+            else
+                return new StatusCodeResult((int)result.StatusCode);
+
             return new OkObjectResult(result);
         }
-
-        [HttpGet]
-        public ActionResult GetNewsByValue(string news)
-        {
-            var url = new VagalumeService("https://www.vagalume.com.br/news/index.js");
-            var result = url.GetNews(news);
-            return new OkObjectResult(result);
-        }
-
     }
 }

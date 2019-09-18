@@ -9,8 +9,14 @@ namespace Vagalume_v2.Models
         [JsonIgnore]
         public HttpStatusCode StatusCode { get; set; }
         public Response response { get; set; }
+
+        [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
         public string type { get; set; }
+
+        [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
         public Artist art { get; set; }
+
+        [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
         public ICollection<MusicDescription> mus { get; set; }
     }
 
