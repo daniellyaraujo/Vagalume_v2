@@ -8,7 +8,6 @@ namespace Vagalume_v2.Models
     {
         [JsonIgnore]
         public HttpStatusCode StatusCode { get; set; }
-        [JsonIgnore]
         public Response response { get; set; }
 
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
