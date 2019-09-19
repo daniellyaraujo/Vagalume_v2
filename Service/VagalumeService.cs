@@ -31,6 +31,7 @@ namespace Vagalume_v2.Service
             {
                 musics.StatusCode = HttpStatusCode.BadGateway;
             }
+
             return musics;
         }
 
@@ -51,21 +52,24 @@ namespace Vagalume_v2.Service
             return music;
         }
 
-        public Music GetArtist(string artist)
+        public ArtistResponse GetArtist(string artist)
         {
             string link = $"{_host}.art?apiKey=8225b96502a09ad6758f6c4d593b4230s&q={artist}&limit=10";
             var music = new Music();
+            var musicApi = new ArtistResponse();
+
             try
             {
                 var result = _client.GetAsync(link).Result;
                 music = result.Content.ReadAsAsync<Music>().Result;
-                music.StatusCode = result.StatusCode;
+                musicApi.Result = music.response.Docs;
+                musicApi.StatusCode = result.StatusCode;
             }
             catch (Exception)
             {
-                music.StatusCode = HttpStatusCode.BadGateway;
+                musicApi.StatusCode = HttpStatusCode.BadGateway;
             }
-            return music;
+            return musicApi;
         }
 
         public Music GetSongByValues(string artist, string song)

@@ -4,6 +4,6 @@ namespace Vagalume_v2.Models
 {
     public class Response
     {
-        public ICollection<Docs> docs { get; set; }
+        public ICollection<Docs> Docs { get; set; }
     }
 }

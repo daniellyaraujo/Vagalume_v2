@@ -2,9 +2,8 @@
 {
     public class Docs
     {
-        public string id { get; set; }
-        public string url { get; set; }
-        public string title { get; set; }
-        public string band { get; set; }
+        public string Id { get; set; }
+        public string Url { get; set; }
+        public string Band { get; set; }
     }
 }

@@ -50,8 +50,9 @@ namespace Vagalume_v2.Controllers
             var result = _service.GetArtist(artist);
             if (result.StatusCode == System.Net.HttpStatusCode.OK)
             {
-                MessageResponse messageResponse = new MessageResponse();
-                if (result.response.docs.Count == 0)
+                var messageResponse = new MessageResponse();
+
+                if (result.Result.Count == 0)
                 {
                     messageResponse.Mensagem = "Artista não localizado";
                     return new BadRequestObjectResult(messageResponse);
@@ -69,8 +70,8 @@ namespace Vagalume_v2.Controllers
             var result = _service.GetAlbum(alb);
             if (result.StatusCode == System.Net.HttpStatusCode.OK)
             {
-                MessageResponse messageResponse = new MessageResponse();
-                if (result.response.docs.Count == 0)
+                var messageResponse = new MessageResponse();
+                if (result.response.Docs.Count == 0)
                 {
                     messageResponse.Mensagem = "Album não localizado";
                     return new BadRequestObjectResult(messageResponse);
@@ -80,6 +81,19 @@ namespace Vagalume_v2.Controllers
                 return new StatusCodeResult((int)result.StatusCode);
 
             return new OkObjectResult(result);
+        }
+
+        [HttpGet("song/{artist}/{song}")]
+        public ActionResult GetSongByValues(string artist, string song)
+        {
+            var result = _service.GetSongByValues(artist, song);
+            switch (result.StatusCode)
+            {
+                case System.Net.HttpStatusCode.OK:
+                    return new OkObjectResult(result);
+                default:
+                    return new StatusCodeResult((int)result.StatusCode);
+            }
         }
     }
 }
