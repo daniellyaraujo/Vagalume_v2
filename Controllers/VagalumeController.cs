@@ -19,9 +19,9 @@ namespace Vagalume_v2.Controllers
         }
 
         [HttpGet("music/{music}")]
-        public ActionResult GetMusicByName(string music)
+        public ActionResult GetMusicsByName(string music)
         {
-            var result = _service.GetMusic(music);
+            var result = _service.GetRelatedMusic(music);
             switch (result.StatusCode)
             {
                 case System.Net.HttpStatusCode.OK:
@@ -64,10 +64,24 @@ namespace Vagalume_v2.Controllers
             return new OkObjectResult(result);
         }
 
+
+        [HttpGet("exmusic/{artist}/{music}")]
+        public ActionResult GetMusicByExValues(string artist, string music)
+        {
+            var result = _service.GetMusicByValues(artist, music);
+            switch (result.StatusCode)
+            {
+                case System.Net.HttpStatusCode.OK:
+                    return new OkObjectResult(result);
+                default:
+                    return new StatusCodeResult((int)result.StatusCode);
+            }
+        }
+
         [HttpGet("album/{alb}")]
         public ActionResult GetAlbByName(string album)
         {
-            var result = _service.GetAlbum(album);
+            var result = _service.GetRelatedAlbum(album);
             if (result.StatusCode == System.Net.HttpStatusCode.OK)
             {
                 var messageResponse = new MessageResponse();
@@ -81,19 +95,6 @@ namespace Vagalume_v2.Controllers
                 return new StatusCodeResult((int)result.StatusCode);
 
             return new OkObjectResult(result);
-        }
-
-        [HttpGet("exmusic/{artist}/{music}")]
-        public ActionResult GetSongByValues(string artist, string music)
-        {
-            var result = _service.GetMusicByValues(artist, music);
-            switch (result.StatusCode)
-            {
-                case System.Net.HttpStatusCode.OK:
-                    return new OkObjectResult(result);
-                default:
-                    return new StatusCodeResult((int)result.StatusCode);
-            }
         }
     }
 }

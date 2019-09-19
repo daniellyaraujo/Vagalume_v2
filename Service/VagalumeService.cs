@@ -57,7 +57,7 @@ namespace Vagalume_v2.Service
 
         public ArtistResponse GetArtist(string artist)
         {
-            string link = $"{_host}.art?apiKey=8225b96502a09ad6758f6c4d593b4230s&q={artist}&limit=10";
+            string link = $"{_host}.art?apiKey=660a4395f992ff67786584e238f501aa&q={artist}&limit=10";
             var music = new Music();
             var musicApi = new ArtistResponse();
 
@@ -94,7 +94,7 @@ namespace Vagalume_v2.Service
 
         public Music GetRelatedAlbum(string album)
         {
-            string url = $"{_host}.alb?apikey=8225b96502a09ad6758f6c4d593b4230s&q={album}18%20Singles&limit=10";
+            string url = $"{_host}.alb?apikey=8225b96502a09ad6758f6c4d593b4230s&q={album}&limit=10";
             var albuns = new Music();
             try
             {

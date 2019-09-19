@@ -8,8 +8,6 @@ namespace Vagalume_v2.Models
         public string id { get; set; }
         public string name { get; set; }
         public string url { get; set; }
-
-        [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
         public ICollection<Related> related { get; set; }
     }
 }
