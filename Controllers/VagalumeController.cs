@@ -64,7 +64,6 @@ namespace Vagalume_v2.Controllers
             return new OkObjectResult(result);
         }
 
-
         [HttpGet("exmusic/{artist}/{music}")]
         public ActionResult GetMusicByExValues(string artist, string music)
         {
@@ -78,7 +77,7 @@ namespace Vagalume_v2.Controllers
             }
         }
 
-        [HttpGet("album/{alb}")]
+        [HttpGet("album/{album}")]
         public ActionResult GetAlbByName(string album)
         {
             var result = _service.GetRelatedAlbum(album);
