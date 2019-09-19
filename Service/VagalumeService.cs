@@ -17,14 +17,16 @@ namespace Vagalume_v2.Service
             _client = new HttpClient();
         }
 
-        public Music GetMusic(string music)
+        public Music GetRelatedMusic(string music)
         {
             var url = $"{_host}.excerpt?apikey=8225b96502a09ad6758f6c4d593b4230s&q={music}&limit=10";
             var musics = new Music();
+            var musicApi = new ArtistResponse();
             try
             {
                 var result = _client.GetAsync(url).Result;
                 musics = result.Content.ReadAsAsync<Music>().Result;
+                musicApi.Result = musics.response.Docs;
                 musics.StatusCode = result.StatusCode;
             }
             catch (Exception)
@@ -43,6 +45,7 @@ namespace Vagalume_v2.Service
             {
                 var result = _client.GetAsync(link).Result;
                 music = result.Content.ReadAsAsync<Music>().Result;
+
                 music.StatusCode = result.StatusCode;
             }
             catch (Exception)
@@ -72,7 +75,7 @@ namespace Vagalume_v2.Service
             return musicApi;
         }
 
-        public Music GetSongByValues(string artist, string song)
+        public Music GetMusicByValues(string artist, string song)
         {
             string url = $"{_host}.php?art={artist}&mus={song}&extra=alb&apiKey=8225b96502a09ad6758f6c4d593b4230s";
             var music = new Music();
@@ -89,7 +92,7 @@ namespace Vagalume_v2.Service
             return music;
         }
 
-        public Music GetAlbum(string alb)
+        public Music GetRelatedAlbum(string alb)
         {
             string url = $"{_host}.alb?apikey=8225b96502a09ad6758f6c4d593b4230s&q={alb}18%20Singles&limit=10";
             var album = new Music();

@@ -8,9 +8,11 @@ namespace Vagalume_v2.Models
     {
         [JsonIgnore]
         public HttpStatusCode StatusCode { get; set; }
-        public Response response { get; set; }
 
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
+        public Response response { get; set; }
+
+        [JsonIgnore]
         public string type { get; set; }
 
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
@@ -27,6 +29,8 @@ namespace Vagalume_v2.Models
         public string url { get; set; }
         public int lang { get; set; }
         public string text { get; set; }
+
+        [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
         public ICollection<Translate> translate { get; set; }
         public Albuns alb { get; set; }
     }

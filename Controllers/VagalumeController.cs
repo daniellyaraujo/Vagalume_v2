@@ -83,10 +83,10 @@ namespace Vagalume_v2.Controllers
             return new OkObjectResult(result);
         }
 
-        [HttpGet("song/{artist}/{song}")]
-        public ActionResult GetSongByValues(string artist, string song)
+        [HttpGet("emusic/{artist}/{music}")]
+        public ActionResult GetSongByValues(string artist, string music)
         {
-            var result = _service.GetSongByValues(artist, song);
+            var result = _service.GetMusicByValues(artist, music);
             switch (result.StatusCode)
             {
                 case System.Net.HttpStatusCode.OK:
