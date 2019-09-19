@@ -92,21 +92,21 @@ namespace Vagalume_v2.Service
             return music;
         }
 
-        public Music GetRelatedAlbum(string alb)
+        public Music GetRelatedAlbum(string album)
         {
-            string url = $"{_host}.alb?apikey=8225b96502a09ad6758f6c4d593b4230s&q={alb}18%20Singles&limit=10";
-            var album = new Music();
+            string url = $"{_host}.alb?apikey=8225b96502a09ad6758f6c4d593b4230s&q={album}18%20Singles&limit=10";
+            var albuns = new Music();
             try
             {
                 var result = _client.GetAsync(url).Result;
-                album = result.Content.ReadAsAsync<Music>().Result;
-                album.StatusCode = result.StatusCode;
+                albuns = result.Content.ReadAsAsync<Music>().Result;
+                albuns.StatusCode = result.StatusCode;
             }
             catch (Exception)
             {
-                album.StatusCode = HttpStatusCode.BadGateway;
+                albuns.StatusCode = HttpStatusCode.BadGateway;
             }
-            return album;
+            return albuns;
         }
     }
 }
