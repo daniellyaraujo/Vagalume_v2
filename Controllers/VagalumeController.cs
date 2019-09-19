@@ -64,10 +64,10 @@ namespace Vagalume_v2.Controllers
             return new OkObjectResult(result);
         }
 
-        [HttpGet("alb/{alb}")]
-        public ActionResult GetAlbByName(string alb)
+        [HttpGet("album/{alb}")]
+        public ActionResult GetAlbByName(string album)
         {
-            var result = _service.GetAlbum(alb);
+            var result = _service.GetAlbum(album);
             if (result.StatusCode == System.Net.HttpStatusCode.OK)
             {
                 var messageResponse = new MessageResponse();
@@ -83,7 +83,7 @@ namespace Vagalume_v2.Controllers
             return new OkObjectResult(result);
         }
 
-        [HttpGet("emusic/{artist}/{music}")]
+        [HttpGet("exmusic/{artist}/{music}")]
         public ActionResult GetSongByValues(string artist, string music)
         {
             var result = _service.GetMusicByValues(artist, music);
