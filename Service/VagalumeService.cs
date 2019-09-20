@@ -37,9 +37,9 @@ namespace Vagalume_v2.Service
             return musics;
         }
 
-        public Music GetPassage(string passage)
+        public Music GetExcerpt(string excerpt)
         {
-            string link = $"{_host}.excerpt?apiKey=8225b96502a09ad6758f6c4d593b4230s&q={passage}&limit=10";
+            string link = $"{_host}.excerpt?apiKey=8225b96502a09ad6758f6c4d593b4230s&q={excerpt}&limit=10";
             var music = new Music();
             try
             {

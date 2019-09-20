@@ -31,10 +31,10 @@ namespace Vagalume_v2.Controllers
             }
         }
 
-        [HttpGet("passage/{passage}")]
-        public ActionResult GetMusicByPassage(string passage)
+        [HttpGet("excerpt/{excerpt}")]
+        public ActionResult GetMusicByExcerpt(string excerpt)
         {
-            var result = _service.GetPassage(passage);
+            var result = _service.GetExcerpt(excerpt);
             switch (result.StatusCode)
             {
                 case System.Net.HttpStatusCode.OK:
